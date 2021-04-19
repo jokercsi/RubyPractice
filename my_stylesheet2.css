@@ -1,0 +1,102 @@
+body {
+  margin-left: 250px;
+  padding: 0px 10px;
+  background-image: url("https://i.stack.imgur.com/LCCB6.jpg");
+}
+nav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 250px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+/* Make sure there is enough space between various parts of the text */
+/* Choose fonts that match nicely. Do not use too many fonts, but also not too few (3-5 may be good numbers). */
+/* Choose colors that match nicely. Do not use too many colors, but also not too few (10-15, counting small variations, may be good numbers). */
+p {
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  word-spacing: 1px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+h1,
+h2 {
+  font-family: Times New Roman;
+  color: darkslategray;
+}
+li {
+  font-family: Arial;
+}
+
+/* Make sure there is enough space between various parts of the text */
+section {
+  margin-top: 50px;
+  border: 1px solid green;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Make sure font sizes match (bigger sizes for more important text) */
+em,
+abbr,
+strong,
+code {
+  font-size: 16px;
+}
+
+em {
+  color: chocolate;
+}
+
+abbr {
+  color: darkblue;
+}
+
+strong {
+  color: darkgreen;
+}
+
+pre {
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+/* Spend some time on interesting table styling. */
+table,
+td,
+th {
+  border: 1px dotted red;
+}
+table {
+  border-collapse: separate;
+}
+th {
+  background-color: lightgreen;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Color for links is medium turquoise before visiting.
+Color for visited links is light sky blue. */
+a:link {
+  color: blue;
+}
+a:visited {
+  color: skyblue;
+}
+
+dt {
+  color: mediumslateblue;
+}
+dd {
+  color: darkslategrey;
+}
