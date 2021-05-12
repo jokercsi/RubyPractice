@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<% require 'uri' %>
+
+# servlet_request = URI('http://localhost:3000/4E_convert_marks_parameter.html.erb/exponent')
+# uri.query = URI.encode_www_form({
+#     part: 'snippet', q: ’〇〇', key: '〇〇'
+#   })
+# servlet_request.query['exponent']
+
+
+<%# here document for the start of the Web page %>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A Program to Convert Marks</title>
+    <style>
+      table, table th, table td {
+        border-collapse: collapse;
+        border: 1px solid black; 
+      }
+      table td {
+        text-align: right;
+        padding-right: 10pt; 
+      }
+    </style>
+  </head>
+
+  <body>
+  <% servlet_request.query['exponent'] %>
+    <h1>A Program to Convert Marks</h1>
+    <p>This system beautifies marks, currently with an exponent of 0.5.</p>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Before</th>
+          <th>After</th>
+        </tr>
+        <% (0..100).each do |before| %>
+          <%# if (exponent = nil) ||  (exponent = " ") ||  (exponent < 0) %>
+            <%# exponent = 0.5 %>
+          <%# end %>
+          <% after = (before**exponent * (100.0/100**exponent)).round %>
+          <tr>
+            <td><%= before %></td>
+            <td><%= after %></td>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%# here document for the end of the Web page %>
+  </body>
+</html>

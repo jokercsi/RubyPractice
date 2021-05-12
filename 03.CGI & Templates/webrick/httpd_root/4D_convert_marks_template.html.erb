@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<%# ruby can not call this function, 루비는 여기 함수를 못부른다..%>
+<% def convert_mark(mark, exponent) %>
+  <% (mark**exponent * (100.0/100**exponent)).round %>
+<% end %>
+
+<%# here document for the start of the Web page %>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>A Program to Convert Marks</title>
+    <style>
+      table, table th, table td {
+        border-collapse: collapse;
+        border: 1px solid black; 
+      }
+      table td {
+        text-align: right;
+        padding-right: 10pt; 
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>A Program to Convert Marks</h1>
+    <p>This system beautifies marks, currently with an exponent of 0.5.</p>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Before</th>
+          <th>After</th>
+        </tr>
+        <% (0..100).each do |before| %>
+          <% after = (before**0.5 * (100.0/100**0.5)).round %>
+          <tr>
+            <td><%= before %></td>
+            <td><%= after %></td>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%# here document for the end of the Web page %>
+  </body>
+</html>

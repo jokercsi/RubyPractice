@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<title>1번 문제</title>
+	<meta charset="utf-8">
+  <style>
+   
+  </style>
+</head>
+
+<body>
+    <form action='a.jsp'>
+        <p>학번 : 
+        <input type="text" maxlength="8">
+        </p>  
+        <p>이름 :
+            <input type="text" maxlength="10">
+        </p>  
+
+        <p>나이 :
+            <input type="number" min="20" max="30">
+        </p>
+        <p>
+            성별 :      
+            <input type="radio" name="sex" value="남자"> <label for="남자">남자</label>
+            <input type="radio" name="sex" value="여자"> <label for="여자">여자</label>
+        </p> 
+        <p>
+            취미 : 여행 <input type="checkbox"> 독서 <input type="checkbox"> 요리 <input type="checkbox">
+        </p> 
+
+        <button>완료</button>
+        <input type='reset' value="지우기">
+    </form>
+</body>
+</html>

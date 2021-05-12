@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<%
+def convert_mark(mark, exponent)
+  (mark**exponent * (100.0/100**exponent)).round
+end
+
+exponent = servlet_request.query['exponent'].to_f
+exponent = 0.5 if exponent==nil || exponent=="" || exponent<=0
+%>
+<%# get보내는명령 %>
+<form method='get'>
+
+<html lang='en-US'>
+  <head>
+    <meta charset="utf-8">
+    <title>A Program to Convert Marks</title>
+    <style>
+      table, table th, table td { border-collapse: collapse; border: 1px solid black; }
+      table td { text-align: right; padding-right: 10pt; }
+    </style>
+  </head>
+  <body>
+    <h1>A Program to Convert Marks</h1>
+    <label for='exponent'>Exponent: </label>
+    <input name='exponent' id='exponent' type='text'>
+    <input type='submit'>
+    <p>This system beautifies marks, currently with an exponent of <%= exponent %>.</p>
+    <table><tbody>
+      <tr><th>Before</th><th>After</th></tr>
+      <% (0..100).each do |before| 
+          after = convert_mark(before, exponent) %>
+        <tr><td><%= before %></td><td><%= after %></td></tr>
+      <% end %>
+    </tbody></table>"
+  </body>
+</html>

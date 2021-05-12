@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<%
+def convert_mark(mark, exponent)
+  (mark**exponent * (100.0/100**exponent)).round
+end
+# exponent쿼리로 불러오기
+exponent = servlet_request.query['exponent'].to_f
+exponent = 0.5 if exponent==nil || exponent=="" || exponent<=0
+%>
+<%# form을 보내는 명령 = get%>
+
+<%
+  # using it in For loop, so it should be Integer
+  start = servlet_request.query['start'].to_i
+  step = servlet_request.query['step'].to_i
+  stop = servlet_request.query['stop'].to_i
+
+  # default value
+  start = 0 if start==nil || start=="" || start<=0
+  step = 1 if step==nil || step=="" || step<=0
+  stop = 100 if stop==nil || stop=="" || stop<=0
+%>
+
+<html lang='en-US'>
+  <head>
+    <meta charset="utf-8">
+    <title>A Program to Convert Marks</title>
+    <style>
+      table, table th, table td { border-collapse: collapse; border: 1px solid black; }
+      table td { text-align: right; padding-right: 10pt; }
+    </style>
+  </head>
+  <body>
+    <h1>A Program to Convert Marks</h1>
+    <div id="input" >
+    <form method='get'>
+      <label for='exponent'>Exponent: </label>
+      <input name='exponent' id='exponent' type='text'>
+      <br>
+      <label for='start'>Enter start value: </label>
+      <input name='start' id='start' type='text'>
+      <br>
+      <label for='step'>Enter step size: </label>
+      <input name='step' id='step' type='text'>
+      <br>
+      <label for='stop'>Enter stop value: </label>
+      <input name='stop' id='stop' type='text'>
+      <br>
+      <input type='submit' value="Recalculate">
+    </form>
+    </div >
+    <p>This system beautifies marks, currently with an exponent of <%= exponent %>.</p>
+    <table><tbody>
+      <tr><th>Before</th><th>After</th></tr>
+        <%#step method = step만큼 늘어남, for loop랑 비슷%>
+        <% start.step(stop, step) do |before| 
+          after = convert_mark(before, exponent) %>
+        <tr><td><%= before %></td><td><%= after %></td></tr>
+      <% end %>
+    </tbody></table>"
+  </body>
+</html>
