@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<%
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+  :adapter => "sqlite3",
+  :database  => "sumo.sqlite3"
+)
+
+# WRESTLERS = table name
+class WRESTLERS < ActiveRecord::Base 
+# nothing needed here
+end
+
+count = WRESTLERS.count(:id)
+avgHeight = WRESTLERS.average(:height)
+maxHeight = WRESTLERS.maximum(:height)
+minHeight = WRESTLERS.minimum(:height)
+sumHeight = WRESTLERS.sum(:height)
+
+avgWeight = WRESTLERS.average(:weight)
+maxWeight = WRESTLERS.maximum(:weight)
+minWeight = WRESTLERS.minimum(:weight)
+sumWeight = WRESTLERS.sum(:weight)
+
+%>
+
+
+<html lang='en-US'>
+  <head>
+    <meta charset="utf-8">
+    <title>Student Data</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <h1>Sumo Wrestler Statistics</h1>
+    <br>
+    <p>Number of wrestlers:<%=count %></p>
+    <p>Average Height:<%=avgHeight %></p>
+    <p>Maximum Height:<%=maxHeight %></p>
+    <p>Minimum Height:<%=minHeight %></p>
+    <p>sum of Heights:<%=sumHeight %></p>
+    <br>
+    <p>Average Weight:<%=avgWeight %></p>
+    <p>Maximum Weight:<%=maxWeight %></p>
+    <p>Minimum Weight:<%=minWeight %></p>
+    <p>sum of Weights:<%=sumWeight %></p>
+  </body>
+</html>
