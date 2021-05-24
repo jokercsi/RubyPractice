@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<%
+require 'active_record'
+ActiveRecord::Base.establish_connection(
+  :adapter => "sqlite3",
+  :database  => "sumo.sqlite3"
+)
+# WRESTLERS = table name
+class WRESTLERS < ActiveRecord::Base 
+# nothing needed here
+end
+
+number = 99
+count = WRESTLERS.count(:id)
+avgHeight = WRESTLERS.average(:height)
+maxHeight = WRESTLERS.maximum(:height)
+minHeight = WRESTLERS.minimum(:height)
+sumHeight = WRESTLERS.sum(:height)
+
+avgWeight = WRESTLERS.average(:weight)
+sumWeight = WRESTLERS.sum(:weight)
+maxWeight = WRESTLERS.maximum(:weight)
+minWeight = WRESTLERS.minimum(:weight)
+
+# pluck method = select column
+db = WRESTLERS.pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+ %>
+
+<%
+#sort Database
+sort = servlet_request.query['sort'].to_s
+if sort == "height"
+    db = WRESTLERS.order(:height).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "name"
+    db = WRESTLERS.order(:name).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "reading"
+    db = WRESTLERS.order(:reading).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "origin"
+    db = WRESTLERS.order(:origin).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "stable"
+    db = WRESTLERS.order(:stable).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "weight"
+    db = WRESTLERS.order(:weight).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "division"
+    db = WRESTLERS.order(:highest_division).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "rank"
+    db = WRESTLERS.order(:highest_rank).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "birth"
+    db = WRESTLERS.order(:birth_date).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+
+elsif sort == "id"
+    db = WRESTLERS.order(:id).pluck(:id, :shikona,:shikona_yomi,:origin, :stable, :weight,:height, :highest_division, :highest_rank, :birth_date)
+end
+%>
+
+<%
+distinct = servlet_request.query['distinct'].to_s
+
+if distinct == "stable"
+    number = WRESTLERS.select(:stable).distinct.count(:stable)
+    stableDb = WRESTLERS.distinct.pluck(:stable)
+    for n in 0..number
+        db[n][4] =  stableDb[n]
+    end
+elsif distinct == "division"
+    number = WRESTLERS.select(:highest_division).distinct.count(:highest_division)
+    divisionDb = WRESTLERS.distinct.pluck(:highest_division)
+    for n in 0..number
+        db[n][7] =  divisionDb[n]
+    end
+end
+%>
+
+<html lang='en-US'>
+  <head>
+    <meta charset="utf-8">
+    <title>Student Data</title>
+    <style>
+    </style>
+  </head>
+  <body>
+
+
+    <h1>Sumo Wrestler Statistics</h1>
+    <br>
+    <p>Number of wrestlers:<%=count %></p>
+    <p>Average Height:<%=avgHeight %></p>
+    <p>Maximum Height:<%=maxHeight %></p>
+    <p>Minimum Height:<%=minHeight %></p>
+    <p>sum of Heights:<%=sumHeight %></p>
+    <br>
+    <p>Average Weight:<%=avgWeight %></p>
+    <p>Maximum Weight:<%=maxWeight %></p>
+    <p>Minimum Weight:<%=minWeight %></p>
+    <p>sum of Weights:<%=sumWeight %></p>
+
+    <h1>Sumo Wrestler Table</h1>
+    <p>Sort by</p>
+    <ul>
+    <li><a href='?sort=id'>id</a></li>
+    <li><a href='?sort=name'>name</a></li>
+    <li><a href='?sort=reading'>reading</a></li>
+    <li><a href='?sort=origin'>origin</a></li>
+    <li><a href='?sort=stable'>stable</a></li>
+    <li><a href='?sort=weight'>weight</a></li>
+    <li><a href='?sort=height'>height</a></li>
+    <li><a href='?sort=division'>division</a></li>
+    <li><a href='?sort=rank'>rank</a></li>
+    <li><a href='?sort=birth'>birth</a></li>
+    </ul>
+    <p>
+    separate value by(
+    <a href='?distinct=stable'>stable</a>,
+    <a href='?distinct=division'>division</a>
+    )
+    </p>
+    <table>
+      <tbody>
+          <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Reading</th>
+              <th>Origin</th>
+              <th>Stable</th>
+              <th>Weight</th>
+              <th>Height</th>
+              <th>Highest Division</th>
+              <th>Highest Rank</th>
+              <th>Date of Birth</th>
+          </tr>
+          <% (0..number).each do |n| %>
+              <tr>
+                  <td><%= db[n][0] %></td>
+                  <td><%= db[n][1] %></td>
+                  <td><%= db[n][2] %></td>
+                  <td><%= db[n][3] %></td>
+                  <td><%= db[n][4] %></td>
+                  <td><%= db[n][5] %></td>
+                  <td><%= db[n][6] %></td>
+                  <td><%= db[n][7] %></td>
+                  <td><%= db[n][8] %></td>
+                  <td><%= db[n][9] %></td>
+              </tr>
+          <% end %>
+      </tbody>
+    </table>
+  </body>
+</html>
