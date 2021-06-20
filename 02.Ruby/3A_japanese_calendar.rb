@@ -1,5 +1,3 @@
-#15817028 Kim Jibin
-
 # ruby는 함수를 앞쪽에 선언해야 된다. 
 # 뒤에다 선언하니까 계속  undefined method (NoMethodError) 라고 오류가 났다.
 def to_japanese_calendar(year)
@@ -36,9 +34,9 @@ def to_japanese_calendar(year)
 end
 
 
-# while line = gets
-#     year = line.to_i
-#     print "Year #{year} in the Western calendar "
-#     puts "is #{to_japanese_calendar(year)} in the Japanese calendar."
-# end
+while line = gets
+    year = line.to_i
+    print "Year #{year} in the Western calendar "
+    puts "is #{to_japanese_calendar(year)} in the Japanese calendar."
+end
 

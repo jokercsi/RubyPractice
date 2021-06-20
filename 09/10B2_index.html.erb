@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Add User Ref To Reviews</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Review ID</th>
+      <th>Login Name</th>
+      <th>Name</th>
+      <th>Login Name</th>
+      <th>Role</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @add_user_ref_to_reviews.each do |add_user_ref_to_review| %>
+      <tr>
+        <td><%= add_user_ref_to_review.user_id %></td>
+        <td><%= add_user_ref_to_review.id %></td>
+        <td><%= add_user_ref_to_review.user.loginname %></td>
+        <td><%= add_user_ref_to_review.user.name %></td>
+        <td><%= add_user_ref_to_review.user.email %></td>
+        <td><%= add_user_ref_to_review.user.role %></td>
+        <td><%= link_to 'Show', add_user_ref_to_review %></td>
+        <td><%= link_to 'Edit', edit_add_user_ref_to_review_path(add_user_ref_to_review) %></td>
+        <td><%= link_to 'Destroy', add_user_ref_to_review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Add User Ref To Review', new_add_user_ref_to_review_path %>
